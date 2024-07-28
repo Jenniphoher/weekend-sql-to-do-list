@@ -12,38 +12,126 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
-    background-color: bisque;
+    background-color: antiquewhite;
 }
 
-form {
+header {
+    margin-top: 80px;
+    margin-bottom: 10px;
+}
+
+#inputForm {
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-td:not(#todoText) {
-    width: 250px;
-    text-align: center;
+input:not(.checkbox) {
+    width: 400px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(255, 218, 218);
 }
 
-#todoInfo {
-    font-size: 20px;
-    color: blue;
-}
-
-#todoText {
+input::placeholder {
+    padding-left: 10px;
     font-size: 15px;
-    color: purple;
+}
+
+.btn-primary {
+    width: 70px;
+    height: 30px;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+    letter-spacing: -1px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px !important;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    height: 350px;
+    width: 350px;
+    background-color: rgba(235, 157, 222, 0.4) !important;
+}
+
+h3 {
+    letter-spacing: 2px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    width: 350px;
+}
+
+/* .card-title {
+    height: 500px;
+    width: 500px;
+    margin-bottom: 20px;
+} */
+
+.card-text {
+    font-size: 17px;
+}
+
+.todoForm {
+    width: 350px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+#flexCheckDefault[type=checkbox] {
+    margin-right: 10px;
+}
+
+#flexCheckDefault[type=checkbox]:hover {
+    cursor: pointer;
+}
+
+#flexCheckChecked[type=checkbox] {
+    margin-right: 10px;
+}
+
+#flexCheckChecked[type=checkbox]:hover {
+    cursor: pointer;
+}
+
+.todoText {
+
 }
 
 .complete {
     font-style: italic;
-    text-decoration: line-through;
 }
 
-button {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 3px;
+#complete {
+    text-decoration: line-through !important;
 }
+
+#deleteButton {
+    float: right;
+    width: 50px;
+    height: 20px;
+    border-radius: 30px !important;
+    margin: 1px 0px !important;
+    padding: 1px 4px !important;
+    font-size: 12px !important;
+    letter-spacing: -0.5px !important;
+}
+
+/* #deleteButton {
+    background-color: rgba(var(--bs-danger-rgb));
+} */

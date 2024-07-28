@@ -15,8 +15,9 @@ console.log('JS is sourced!');
     // 4. DELETE button will have axios.delete
     // 5. Mark complete button will UPDATE and have axios.put
 
-let tableBody = document.querySelector('#tableBody');
+let cardBody = document.querySelector('#cardBody');
 let todoInput = document.querySelector('#todoInput');
+let todoTitle = document.querySelector('#todoTitle');
 
 
 getToDo();
@@ -34,55 +35,7 @@ function getToDo() {
         let data = response.data;
         
         console.log('This is data:', data);
-        
-        tableBody.innerHTML = '';
-        for(let todo of data) {
-
-            // --------------------- data test id's
-            if(todo.isComplete === true) {
-
-                tableBody.innerHTML += `
-
-                <tr data-testid="toDoItem" id="todoInfo" class="complete">
-                    <td id="todoText">${todo.text}</td>
-                    <td >${todo.isComplete}</td>
-                    <td >
-                        <button 
-                            data-testid="completeButton"
-                            onClick="completeButton(${todo.id})">Mark Complete</button>
-                    </td>
-                    <td >
-                        <button 
-                            data-testid="deleteButton"
-                            onClick="deleteToDo(${todo.id})">Delete</button>
-                    </td>
-                </tr>`;
-
-                console.log(`${todo.text}:${todo.id} in ${tableBody} with complete`);
-
-            } else if(todo.isComplete === false) {
-
-                tableBody.innerHTML += `
-
-                <tr data-testid="toDoItem" id="todoInfo">
-                    <td id="todoText">${todo.text}</td>
-                    <td >${todo.isComplete}</td>
-                    <td >
-                        <button 
-                            data-testid="completeButton"
-                            onClick="completeButton(${todo.id})">Mark Complete</button>
-                    </td>
-                    <td >
-                        <button 
-                            data-testid="deleteButton"
-                            onClick="deleteToDo(${todo.id})">Delete</button>
-                    </td>
-                </tr>`;
-
-                console.log(`${todo.text}:${todo.id} in ${tableBody} without complete`);
-            }
-
-        }
+        displayToDo(data);
     })
 
     .catch((err) => {
@@ -93,33 +46,95 @@ function getToDo() {
 
 // ================== DISPLAY FUNCTION ================== 
 
-// function displayToDo(list) {
+function displayToDo(list) {
 
-//     tableBody.innerHTML = '';
-//     for(let todo of list) {
-//         // --------------------- data test id's
-//         tableBody.innerHTML += `
+    cardBody.innerHTML = '';
+    for(let todo of list) {
 
-//             <tr data-testid="toDoItem">
-//                 <td data-testid="toDoItem" id="todoInfo">${todo.text}</td>
-//                 <td data-testid="toDoItem" >${todo.isComplete}</td>
-//                 <td data-testid="toDoItem" >
-//                     <button 
-//                         data-testid="completeButton"
-//                         onClick="markComplete(${todo.id})">Mark Complete</button>
-//                 </td>
-//                 <td data-testid="toDoItem" >
-//                     <button 
-//                         data-testid="deleteButton"
-//                         onClick="deleteToDo(${todo.id})">Delete</button>
-//                 </td>
-//             </tr>`;
+        // <div class="col-xxl-2">${todo.isComplete}</div>
+        // <div class="col">
+        // <button 
+        //     data-testid="completeButton"
+        //     type="button"
+        //     class="btn btn-success"
+        //     onClick="completeButton(${todo.id})">Mark Complete</button>
+        // </div>
 
-//         if(todo.isComplete === true) {
-//             document.querySelector('#todoInfo').classList.add('complete');
-//         }
-//     }
-// }
+        // // --------------------- data test id's
+        if(todo.isComplete === true) {
+            cardBody.innerHTML += `
+                <div 
+                data-testid="toDoItem"
+                class="complete"
+                class="card-text" 
+                id="todoInfo">
+                    <form class="todoForm"
+                    class="input-group">
+                    <input 
+                        data-testid="completeButton"
+                        type="checkbox" 
+                        id="flexCheckChecked" checked
+                        class="checkbox"
+                        class="form-check-input mt-0"
+                        onClick="completeButton(${todo.id})">
+                    <label class="todoText" for="flexCheckChecked" id="complete">${todo.text}</label>
+                    <button 
+                        type="button" class="btn btn-outline-danger"
+                        id="deleteButton"
+                        data-testid="deleteButton"
+                        onClick="deleteToDo(${todo.id})">Delete
+                    </button>
+                    </form>
+                </div>`;
+            console.log(`${todo.text}:${todo.id} in ${cardBody} with complete`);
+
+        } else if(todo.isComplete === false) {
+            cardBody.innerHTML += `
+                <div 
+                data-testid="toDoItem"
+                class="card-text" 
+                id="todoInfo">
+                    <form class="todoForm"
+                    class="input-group">
+                    <input 
+                        data-testid="completeButton"
+                        type="checkbox" 
+                        id="flexCheckDefault"
+                        class="checkbox"
+                        class="form-check-input mt-0"
+                        onClick="completeButton(${todo.id})">
+                    <label class="todoText" for="flexCheckDefault">${todo.text}</label>
+                    <button 
+                        type="button" class="btn btn-outline-danger"
+                        id="deleteButton"
+                        data-testid="deleteButton"
+                        onClick="deleteToDo(${todo.id})">Delete
+                    </button>
+                    </form>
+                </div>`;
+
+            // <div class="card" data-testid="toDoItem" id="todoInfo">
+            //     <div class="col" id="todoText">${todo.text}</div>
+            //     <div class="col" >
+            //         <button 
+            //             data-testid="completeButton"
+            //             type="button"
+            //             class="btn btn-success"
+            //             onClick="completeButton(${todo.id})">Mark Complete</button>
+            //     </div>
+            //     <div class="col" >
+            //         <button 
+            //             data-testid="deleteButton"
+            //             class="btn btn-danger"
+            //             data-testid="deleteButton"
+            //             id="deleteButton"
+            //             onClick="deleteToDo(${todo.id})">Delete</button>
+            //     </div>
+            // </div>`;
+            console.log(`${todo.text}:${todo.id} in ${cardBody} without complete`);
+        }
+    }
+}
 
 
 // ================== ADD BUTTON && POST FUNCTION ================== 
@@ -148,7 +163,28 @@ function addToDo(event) {
 
 // ================== DELETE FUNCTION ================== 
 
+// STRETCH sweet-alert turned off for test
 function deleteToDo(listId) {
+
+    // swal({
+    //     title: 'Are you sure?',
+    //     text: 'The to-do will be permanently deleted.',
+    //     icon: 'warning',
+    //     buttons: true,
+    //     dangerMode: true
+    // }).then((deleted) => {
+
+    //     if(deleted) {
+    //         swal('Your to-do has been deleted.', {
+    //             icon: 'success'
+    //         });
+
+            axiosDelete(listId);
+    //     }
+    // })
+}
+
+function axiosDelete(listId) {
 
     axios({
         method: 'DELETE',
@@ -165,6 +201,7 @@ function deleteToDo(listId) {
     })
 
 }
+
 
 
 // ================== PUT/UPDATE FUNCTION ================== 
