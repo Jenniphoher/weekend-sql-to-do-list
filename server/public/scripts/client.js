@@ -65,7 +65,7 @@ function displayToDo(list) {
             cardBody.innerHTML += `
                 <div 
                 data-testid="toDoItem"
-                class="complete"
+                class="completed"
                 class="card-text" 
                 id="todoInfo">
                     <form class="todoForm"
